@@ -1,5 +1,5 @@
 vrrp_instance <%= @name %> {
-  virtual_router_id <%= @name %>
+  virtual_router_id <%= @virtual_router_id %>
 
   # Advert interval
   advert_int <%= @advert_int %>
@@ -26,6 +26,12 @@ vrrp_instance <%= @name %> {
   <% @track_script.each do |script| -%>
   <%= script %>
   <% end %>}
+  <% end -%>
+  <% if @auth_type and @auth_pass then %>
+  authentication {
+    auth_type <%= @auth_type %>
+    auth_pass <%= @auth_pass %>
+  }
   <% end -%>
 
   <% if @notify then -%>notify <%= @notify %><% end %>
