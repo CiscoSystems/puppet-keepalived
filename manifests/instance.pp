@@ -17,8 +17,6 @@ define keepalived::instance (
 
   include keepalived::variables
 
-  Keepalived::Vrrp_script[ $track_script ] -> Keepalived::Instance[ $name ]
-
   concat::fragment { "keepalived_${name}":
     target  => $keepalived::variables::keepalived_conf,
     content => template( 'keepalived/keepalived_instance.erb' ),
